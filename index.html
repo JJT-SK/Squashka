@@ -119,6 +119,7 @@
     }
     nav.compact {
   padding: 0;
+  transition: padding 0.4s ease;
 }
     .logo {
       font-family: 'Playfair Display', serif;
@@ -129,14 +130,16 @@
   display: none;
 }
     nav ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.25rem;
-      margin: 0;
-      padding: 0.25rem 0 0;
-    }
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.25rem;
+  margin: 0;
+  padding: 0.25rem 0 0;
+  opacity: 1;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
     nav ul li a {
       text-decoration: none;
       color: inherit;
@@ -157,7 +160,11 @@
       opacity: 1;
       transform: translateY(0);
     }
-  </style>
+  nav.compact ul {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+</style>
 </head>
 <body>
   <nav id="navbar">
