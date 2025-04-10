@@ -115,19 +115,26 @@
       backdrop-filter: blur(10px);
       background-color: transparent;
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      transition: padding 0.3s ease;
+    }
+    nav.compact {
+      padding: 0.75rem 1rem;
     }
     .logo {
       display: flex;
       justify-content: center;
       gap: 0.2rem;
-      position: relative;
-      width: 150px;
       height: 24px;
       overflow: visible;
+      transition: opacity 0.3s ease;
+    }
+    .logo.hidden {
+      opacity: 0;
+      pointer-events: none;
     }
     .logo span {
       display: inline-block;
-      transition: transform 0.3s ease, opacity 0.3s ease;
+      transition: transform 0.4s ease, opacity 0.4s ease;
       font-weight: 800;
       font-size: 1.5rem;
     }
@@ -163,7 +170,7 @@
   </style>
 </head>
 <body>
-  <nav>
+  <nav id="navbar">
     <div class="logo" id="logo">
       <span>S</span><span>Q</span><span>U</span><span>A</span><span>S</span><span>H</span><span>K</span><span>A</span>
     </div>
@@ -229,24 +236,28 @@
     reveals.forEach(reveal => observer.observe(reveal));
 
     const logoSpans = document.querySelectorAll('#logo span');
+    const logo = document.getElementById('logo');
+    const navbar = document.getElementById('navbar');
     const maxScroll = 300;
 
     window.addEventListener('scroll', () => {
       const scrollY = Math.min(window.scrollY, maxScroll);
       const progress = scrollY / maxScroll;
-      const center = 0; // keep only the first "S"
 
       logoSpans.forEach((span, i) => {
-        if (i === center) {
-          span.style.transform = 'translateX(0px)';
-          span.style.opacity = '1';
-        } else {
-          const direction = i < center ? -1 : 1;
-          const spread = 80 * progress * Math.abs(i - center);
-          span.style.transform = `translateX(${direction * spread}px)`;
-          span.style.opacity = `${1 - progress * 1.2}`;
-        }
+        const direction = i < logoSpans.length / 2 ? -1 : 1;
+        const spread = 80 * progress * Math.abs(i - logoSpans.length / 2);
+        span.style.transform = `translateX(${direction * spread}px)`;
+        span.style.opacity = `${1 - progress * 1.2}`;
       });
+
+      if (progress >= 1) {
+        logo.classList.add('hidden');
+        navbar.classList.add('compact');
+      } else {
+        logo.classList.remove('hidden');
+        navbar.classList.remove('compact');
+      }
     });
   </script>
 </body>
