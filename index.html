@@ -140,7 +140,6 @@
       color: #555;
     }
 
-    /* Animation styles */
     .reveal {
       opacity: 0;
       transform: translateY(40px);
@@ -218,15 +217,16 @@
     }, { threshold: 0.1 });
     reveals.forEach(reveal => observer.observe(reveal));
 
-    // Logo scroll effect
     const logoSpans = document.querySelectorAll('#logo span');
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
+      const maxScroll = 300;
+      const progress = Math.min(scrollY / maxScroll, 1);
       logoSpans.forEach((span, i) => {
-        const distance = scrollY * 0.15 * (logoSpans.length - i);
-        const keep = i >= logoSpans.length - 3; // Keep SKA
-        span.style.transform = `translateX(-${distance}px)`;
-        span.style.opacity = keep ? '1' : `${Math.max(0, 1 - scrollY / 200)}`;
+        const keep = i >= logoSpans.length - 3; // keep SKA
+        const offset = (1 - progress) * 0 + progress * 60 * (logoSpans.length - i);
+        span.style.transform = `translateX(-${offset}px)`;
+        span.style.opacity = keep ? '1' : `${Math.max(0, 1 - progress * 1.5)}`;
       });
     });
   </script>
