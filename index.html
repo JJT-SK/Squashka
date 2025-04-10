@@ -118,28 +118,25 @@
       transition: padding 0.3s ease, height 0.3s ease;
     }
     nav.compact {
-  padding: 0;
-  transition: padding 0.4s ease;
-}
+      padding: 0;
+    }
     .logo {
       font-family: 'Playfair Display', serif;
       font-size: 2rem;
       transition: opacity 0.3s ease;
     }
     .logo.hidden {
-  display: none;
-}
+      display: none;
+    }
     nav ul {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1.25rem;
-  margin: 0;
-  padding: 0.25rem 0 0;
-  opacity: 1;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.25rem;
+      margin: 0;
+      padding: 0.25rem 0 0;
+    }
     nav ul li a {
       text-decoration: none;
       color: inherit;
@@ -160,16 +157,7 @@
       opacity: 1;
       transform: translateY(0);
     }
-  nav ul.fade {
-  opacity: 0;
-  transform: translateY(-10px);
-}
-
-nav ul.fade.in {
-  opacity: 1;
-  transform: translateY(0);
-}
-</style>
+  </style>
 </head>
 <body>
   <nav id="navbar">
@@ -237,23 +225,14 @@ nav ul.fade.in {
 
     const logo = document.getElementById('logo');
     const navbar = document.getElementById('navbar');
-    const maxScroll = 450;
+    const maxScroll = 300;
 
     window.addEventListener('scroll', () => {
-  const scrollY = Math.min(window.scrollY, maxScroll);
-  const progress = scrollY / maxScroll;
+      const scrollY = Math.min(window.scrollY, maxScroll);
+      const progress = scrollY / maxScroll;
 
-  const navLinks = document.querySelector('#navbar ul');
-
-  if (progress >= 1) {
-    logo.classList.add('hidden');
-    navbar.classList.add('compact');
-    navLinks.classList.add('fade');
-    setTimeout(() => navLinks.classList.add('in'), 50);
-  } else {
-    logo.classList.remove('hidden');
-    navbar.classList.remove('compact');
-    navLinks.classList.remove('fade', 'in');
+      if (progress >= 1) {
+        logo.classList.add('hidden');
         navbar.classList.add('compact');
       } else {
         logo.classList.remove('hidden');
