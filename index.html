@@ -16,6 +16,24 @@
       background-color: #f5f5f5;
       color: #000;
       line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    @media (prefers-color-scheme: dark) {
+      body {
+        background-color: #0e0e0e;
+        color: #eee;
+      }
+      .card {
+        background-color: #1a1a1a;
+        box-shadow: 0 15px 35px rgba(255,255,255,0.05);
+      }
+      .button {
+        background-color: #fff;
+        color: #000;
+      }
+      .button:hover {
+        background-color: #ccc;
+      }
     }
     header, footer, section {
       padding: 2.5rem 1.25rem;
@@ -28,7 +46,7 @@
     }
     p {
       margin-bottom: 1.5rem;
-      color: #444;
+      color: inherit;
     }
     .hero {
       text-align: center;
@@ -103,6 +121,11 @@
       padding-top: 2rem;
     }
     nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      background-color: rgba(255, 255, 255, 0.85);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -110,10 +133,22 @@
       max-width: 1100px;
       margin: 0 auto;
     }
+    @media (prefers-color-scheme: dark) {
+      nav {
+        background-color: rgba(14, 14, 14, 0.85);
+      }
+    }
     nav .logo {
       font-weight: 800;
       font-size: 1.5rem;
       margin-bottom: 0.75rem;
+    }
+    .menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
     }
     nav ul {
       list-style: none;
@@ -126,7 +161,7 @@
     }
     nav ul li a {
       text-decoration: none;
-      color: #000;
+      color: inherit;
       font-weight: 600;
       font-size: 0.95rem;
       transition: 0.2s;
@@ -134,19 +169,22 @@
     nav ul li a:hover {
       color: #555;
     }
-    @media (min-width: 700px) {
-      nav {
-        flex-direction: row;
-        justify-content: space-between;
+    @media (max-width: 699px) {
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 1.25rem;
+        right: 1.25rem;
       }
-      nav .logo {
-        margin-bottom: 0;
+      nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
+        background-color: inherit;
       }
-      .input-group {
-        flex-direction: row;
-      }
-      .hero h1 {
-        font-size: 3.5rem;
+      nav ul.show {
+        display: flex;
       }
     }
 
@@ -165,6 +203,7 @@
 <body>
   <nav>
     <div class="logo">Squashka</div>
+    <button class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('show')">☰</button>
     <ul>
       <li><a href="#products">Flavours</a></li>
       <li><a href="#subscribe">Subscribe</a></li>
@@ -217,7 +256,6 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     const reveals = document.querySelectorAll('.reveal');
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -225,10 +263,7 @@
         }
       });
     }, { threshold: 0.1 });
-
-    reveals.forEach(reveal => {
-      observer.observe(reveal);
-    });
+    reveals.forEach(reveal => observer.observe(reveal));
   </script>
 </body>
 </html>
