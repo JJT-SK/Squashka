@@ -218,15 +218,23 @@
     reveals.forEach(reveal => observer.observe(reveal));
 
     const logoSpans = document.querySelectorAll('#logo span');
+    const centerIndex = 0; // always preserve the first "S"
+    const maxScroll = 300;
+
     window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-      const maxScroll = 300;
-      const progress = Math.min(scrollY / maxScroll, 1);
+      const scrollY = Math.min(window.scrollY, maxScroll);
+      const progress = scrollY / maxScroll;
+
       logoSpans.forEach((span, i) => {
-        const keep = i >= logoSpans.length - 3; // keep SKA
-        const offset = (1 - progress) * 0 + progress * 60 * (logoSpans.length - i);
-        span.style.transform = `translateX(-${offset}px)`;
-        span.style.opacity = keep ? '1' : `${Math.max(0, 1 - progress * 1.5)}`;
+        if (i === 0) {
+          span.style.transform = 'translateX(0px)';
+          span.style.opacity = '1';
+        } else {
+          const direction = i < 4 ? -1 : 1; // left side go left, right side go right
+          const spread = 80 * progress * (i < 4 ? (4 - i) : (i - 4));
+          span.style.transform = `translateX(${direction * spread}px)`;
+          span.style.opacity = `${1 - progress * 1.2}`;
+        }
       });
     });
   </script>
