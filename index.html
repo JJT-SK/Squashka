@@ -34,6 +34,7 @@
       text-align: center;
       padding-top: 4rem;
       padding-bottom: 4rem;
+      position: relative;
     }
     .hero h1 {
       font-size: 2.25rem;
@@ -43,6 +44,16 @@
       font-size: 1.125rem;
       max-width: 90%;
       margin: 0 auto 2rem;
+    }
+    .can-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1);
+      width: 120px;
+      transition: transform 0.2s ease-out;
+      z-index: -1;
+      opacity: 0.8;
     }
     .button {
       background-color: #000;
@@ -170,6 +181,7 @@
   </nav>
 
   <header class="hero reveal">
+    <img src="https://via.placeholder.com/120x300.png?text=Squashka+Can" alt="Squashka Can" class="can-image" id="can">
     <h1>Meet Squashka</h1>
     <p>A new era of ready-to-drink. Crafted with premium vodka, vibrant squash, and crystal-clear water. Perfectly mixed. Elegantly canned.</p>
     <button class="button">Buy Now</button>
@@ -225,19 +237,24 @@
 
     const logo = document.getElementById('logo');
     const navbar = document.getElementById('navbar');
-    const maxScroll = 300;
+    const can = document.getElementById('can');
 
     window.addEventListener('scroll', () => {
-      const scrollY = Math.min(window.scrollY, maxScroll);
-      const progress = scrollY / maxScroll;
+      const scrollY = window.scrollY;
 
-      if (progress >= 1) {
+      // Fade out logo and shrink nav
+      if (scrollY > 300) {
         logo.classList.add('hidden');
         navbar.classList.add('compact');
       } else {
         logo.classList.remove('hidden');
         navbar.classList.remove('compact');
       }
+
+      // Can animation
+      const scale = 1 + scrollY * 0.0005;
+      const translateY = scrollY * 0.1;
+      can.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
     });
   </script>
 </body>
