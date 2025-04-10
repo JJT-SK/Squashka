@@ -149,6 +149,17 @@
         font-size: 3.5rem;
       }
     }
+
+    /* Animation styles */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.6s ease-out;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -161,13 +172,13 @@
     </ul>
   </nav>
 
-  <header class="hero">
+  <header class="hero reveal">
     <h1>Meet Squashka</h1>
     <p>A new era of ready-to-drink. Crafted with premium vodka, vibrant squash, and crystal-clear water. Perfectly mixed. Elegantly canned.</p>
     <button class="button">Buy Now</button>
   </header>
 
-  <section id="products">
+  <section id="products" class="reveal">
     <h2 style="text-align:center">Our Flavours</h2>
     <div class="products">
       <div class="card">
@@ -188,7 +199,7 @@
     </div>
   </section>
 
-  <section id="subscribe">
+  <section id="subscribe" class="reveal">
     <h2 style="text-align:center">Stay in the Loop</h2>
     <p style="text-align:center">Sign up for product drops, exclusive offers, and Squashka news.</p>
     <form class="input-group" style="max-width:600px; margin: 0 auto;">
@@ -197,13 +208,27 @@
     </form>
   </section>
 
-  <footer id="footer" class="footer">
+  <footer id="footer" class="footer reveal">
     <p>&copy; <span id="year"></span> Squashka. All rights reserved.</p>
     <p>Designed for the refreshingly modern.</p>
   </footer>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    const reveals = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(reveal => {
+      observer.observe(reveal);
+    });
   </script>
 </body>
 </html>
