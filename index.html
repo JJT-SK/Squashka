@@ -1,25 +1,82 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Squashka</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #fdfdfd;
-    }
-    img {
-      max-width: 300px;
-      width: 100%;
-    }
-  </style>
+  <title>SQUASHKA™ – Vodka Meets Cordial</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 <body>
-  <img src="test.png" alt="Squashka Logo" />
+
+  <header class="hero">
+    <nav>
+      <div class="logo">SQUASHKA™</div>
+      <ul>
+        <li><a href="#flavours">Flavours</a></li>
+        <li><a href="#story">Our Story</a></li>
+        <li><a href="#shop">Shop</a></li>
+      </ul>
+    </nav>
+    <div class="hero-text">
+      <h1>Squash. Vodka. Vibes.</h1>
+      <p>The UK’s most nostalgic drink, remixed for grown-ups.</p>
+      <a href="#shop" class="btn">Grab a Can</a>
+    </div>
+  </header>
+
+  <section id="flavours" class="section flavors">
+    <h2>Flavours That Slap</h2>
+    <div class="flavor-grid">
+      <div class="flavor-card">
+        <img src="images/orange.png" alt="Orange Squashka">
+        <h3>Orange Mayhem</h3>
+        <p>The OG squashka. Citrus chaos with a vodka kick.</p>
+      </div>
+      <div class="flavor-card">
+        <img src="images/blackcurrant.png" alt="Blackcurrant Squashka">
+        <h3>Berry On Blast</h3>
+        <p>Blackcurrant cordial & vodka – sweet, sharp, legendary.</p>
+      </div>
+      <div class="flavor-card">
+        <img src="images/tropical.png" alt="Tropical Squashka">
+        <h3>TropiChaos</h3>
+        <p>It’s like a beach holiday and a night out collided.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="story" class="section story">
+    <h2>How It Started</h2>
+    <p>Squashka was born in messy kitchens, blurry house parties, and undergrad halls. We took the legendary student mix – squash and vodka – and turned it into a legit drink. No faff. No shame. Just pure nostalgic chaos in a can.</p>
+    <p>Made in the UK. Drunk everywhere. Accept no knock-offs.</p>
+  </section>
+
+  <section id="shop" class="section shop">
+    <h2>Get SQUASHED</h2>
+    <div class="shop-grid">
+      <div class="product">
+        <img src="images/4pack.png" alt="Squashka 4 Pack">
+        <h3>Squashka 4-Pack</h3>
+        <p>Mixed Flavours. 250ml cans. 5% ABV.</p>
+        <span>£9.99</span>
+        <a href="#" class="btn">Add to Cart</a>
+      </div>
+      <div class="product">
+        <img src="images/12pack.png" alt="Squashka 12 Pack">
+        <h3>Party Pack (12 Cans)</h3>
+        <p>Perfect for pre’s, afters, and festivals.</p>
+        <span>£26.99</span>
+        <a href="#" class="btn">Add to Cart</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>SQUASHKA™ 2025 | Drink responsibly | Must be 18+ to purchase</p>
+    <p>Follow us on IG @squashka.uk</p>
+  </footer>
+
 </body>
 </html>
