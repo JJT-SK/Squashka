@@ -121,23 +121,13 @@
       padding: 0.25rem 0 0;
     }
     .logo {
-      display: flex;
-      justify-content: center;
-      gap: 0.2rem;
-      height: auto;
-      overflow: visible;
-      transition: opacity 0.3s ease;
       font-family: 'Playfair Display', serif;
       font-size: 2rem;
+      transition: opacity 0.3s ease;
     }
     .logo.hidden {
       opacity: 0;
       pointer-events: none;
-    }
-    .logo span {
-      display: inline-block;
-      transition: transform 0.4s ease, opacity 0.4s ease;
-      font-weight: 700;
     }
     nav ul {
       list-style: none;
@@ -172,9 +162,7 @@
 </head>
 <body>
   <nav id="navbar">
-    <div class="logo" id="logo">
-      <span>S</span><span>Q</span><span>U</span><span>A</span><span>S</span><span>H</span><span>K</span><span>A</span>
-    </div>
+    <div class="logo" id="logo">SQUASHKA</div>
     <ul>
       <li><a href="#products">Flavours</a></li>
       <li><a href="#subscribe">Subscribe</a></li>
@@ -236,7 +224,6 @@
     }, { threshold: 0.1 });
     reveals.forEach(reveal => observer.observe(reveal));
 
-    const logoSpans = document.querySelectorAll('#logo span');
     const logo = document.getElementById('logo');
     const navbar = document.getElementById('navbar');
     const maxScroll = 300;
@@ -244,13 +231,6 @@
     window.addEventListener('scroll', () => {
       const scrollY = Math.min(window.scrollY, maxScroll);
       const progress = scrollY / maxScroll;
-
-      logoSpans.forEach((span, i) => {
-        const direction = i < logoSpans.length / 2 ? -1 : 1;
-        const spread = 80 * progress * Math.abs(i - logoSpans.length / 2);
-        span.style.transform = `translateX(${direction * spread}px)`;
-        span.style.opacity = `${1 - progress * 1.2}`;
-      });
 
       if (progress >= 1) {
         logo.classList.add('hidden');
