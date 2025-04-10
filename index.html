@@ -121,13 +121,6 @@
       font-size: 1.5rem;
       margin-bottom: 0.75rem;
     }
-    .menu-toggle {
-      display: none;
-      font-size: 1.5rem;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
     nav ul {
       list-style: none;
       display: flex;
@@ -147,24 +140,6 @@
     nav ul li a:hover {
       color: #555;
     }
-    @media (max-width: 699px) {
-      .menu-toggle {
-        display: block;
-        position: absolute;
-        top: 1.25rem;
-        right: 1.25rem;
-      }
-      nav ul {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        margin-top: 1rem;
-        background-color: inherit;
-      }
-      nav ul.show {
-        display: flex;
-      }
-    }
 
     /* Animation styles */
     .reveal {
@@ -181,7 +156,6 @@
 <body>
   <nav>
     <div class="logo">Squashka</div>
-    <button class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('show')">☰</button>
     <ul>
       <li><a href="#products">Flavours</a></li>
       <li><a href="#subscribe">Subscribe</a></li>
