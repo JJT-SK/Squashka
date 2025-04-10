@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Squashka – Premium Vodka Beverage</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <style>
     * {
       box-sizing: border-box;
@@ -109,7 +109,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 2rem 1rem;
+      padding: 1.25rem 1rem 0.75rem;
       max-width: 1100px;
       margin: 0 auto;
       backdrop-filter: blur(10px);
@@ -118,15 +118,17 @@
       transition: padding 0.3s ease;
     }
     nav.compact {
-      padding: 0.5rem 1rem;
+      padding: 0.5rem 1rem 0.25rem;
     }
     .logo {
       display: flex;
       justify-content: center;
       gap: 0.2rem;
-      height: 28px;
+      height: auto;
       overflow: visible;
       transition: opacity 0.3s ease;
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
     }
     .logo.hidden {
       opacity: 0;
@@ -135,10 +137,7 @@
     .logo span {
       display: inline-block;
       transition: transform 0.4s ease, opacity 0.4s ease;
-      font-family: 'Playfair Display', serif;
       font-weight: 700;
-      font-size: 1.8rem;
-      letter-spacing: 0.05em;
     }
     nav ul {
       list-style: none;
@@ -147,7 +146,7 @@
       justify-content: center;
       gap: 1.25rem;
       margin: 0;
-      padding: 0;
+      padding: 0.75rem 0 0;
     }
     nav ul li a {
       text-decoration: none;
