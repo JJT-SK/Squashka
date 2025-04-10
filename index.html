@@ -116,9 +116,20 @@
       background-color: transparent;
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
+    .logo {
+      display: flex;
+      justify-content: center;
+      gap: 0.2rem;
+      position: relative;
+      width: 150px;
+      height: 24px;
+      overflow: visible;
+    }
     .logo span {
       display: inline-block;
       transition: transform 0.3s ease, opacity 0.3s ease;
+      font-weight: 800;
+      font-size: 1.5rem;
     }
     nav ul {
       list-style: none;
@@ -218,20 +229,20 @@
     reveals.forEach(reveal => observer.observe(reveal));
 
     const logoSpans = document.querySelectorAll('#logo span');
-    const centerIndex = 0; // always preserve the first "S"
     const maxScroll = 300;
 
     window.addEventListener('scroll', () => {
       const scrollY = Math.min(window.scrollY, maxScroll);
       const progress = scrollY / maxScroll;
+      const center = 0; // keep only the first "S"
 
       logoSpans.forEach((span, i) => {
-        if (i === 0) {
+        if (i === center) {
           span.style.transform = 'translateX(0px)';
           span.style.opacity = '1';
         } else {
-          const direction = i < 4 ? -1 : 1; // left side go left, right side go right
-          const spread = 80 * progress * (i < 4 ? (4 - i) : (i - 4));
+          const direction = i < center ? -1 : 1;
+          const spread = 80 * progress * Math.abs(i - center);
           span.style.transform = `translateX(${direction * spread}px)`;
           span.style.opacity = `${1 - progress * 1.2}`;
         }
