@@ -116,10 +116,9 @@
       background-color: transparent;
       border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     }
-    nav .logo {
-      font-weight: 800;
-      font-size: 1.5rem;
-      margin-bottom: 0.75rem;
+    .logo span {
+      display: inline-block;
+      transition: transform 0.3s ease, opacity 0.3s ease;
     }
     nav ul {
       list-style: none;
@@ -155,7 +154,9 @@
 </head>
 <body>
   <nav>
-    <div class="logo">Squashka</div>
+    <div class="logo" id="logo">
+      <span>S</span><span>Q</span><span>U</span><span>A</span><span>S</span><span>H</span><span>K</span><span>A</span>
+    </div>
     <ul>
       <li><a href="#products">Flavours</a></li>
       <li><a href="#subscribe">Subscribe</a></li>
@@ -216,6 +217,18 @@
       });
     }, { threshold: 0.1 });
     reveals.forEach(reveal => observer.observe(reveal));
+
+    // Logo scroll effect
+    const logoSpans = document.querySelectorAll('#logo span');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      logoSpans.forEach((span, i) => {
+        const distance = scrollY * 0.15 * (logoSpans.length - i);
+        const keep = i >= logoSpans.length - 3; // Keep SKA
+        span.style.transform = `translateX(-${distance}px)`;
+        span.style.opacity = keep ? '1' : `${Math.max(0, 1 - scrollY / 200)}`;
+      });
+    });
   </script>
 </body>
 </html>
