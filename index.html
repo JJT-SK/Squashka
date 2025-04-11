@@ -180,22 +180,57 @@
       padding-bottom: 3rem;
     }
     
-    /* Can Feature */
+    /* Can Feature (Updated for 3 images animation) */
     .can-feature {
       margin: 0 auto 4rem;
       padding: 0;
+      position: relative;
+      height: 400px; /* Set a height to allow for absolute positioning */
     }
     
-    .can-feature img {
+    .can-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .can-container .can {
       width: 50vw;
       max-width: 400px;
       height: auto;
       filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
-      transition: transform 0.5s ease;
+      transition: transform 0.6s ease, opacity 0.6s ease;
+      position: absolute;
     }
     
-    .can-feature img:hover {
-      transform: scale(1.03) translateY(-10px);
+    /* Initially, center can visible; side cans hidden */
+    .can.center {
+      z-index: 2;
+      opacity: 1;
+    }
+    
+    .can.left,
+    .can.right {
+      opacity: 0;
+      transform: translate(0, 0) scale(1);
+    }
+    
+    /* Animation when the section is in view */
+    .can-feature.active .can.left {
+      transform: translateX(-150px) translateY(50px) scale(0.9);
+      opacity: 1;
+    }
+    
+    .can-feature.active .can.center {
+      transform: translateY(-10px) scale(1.03);
+    }
+    
+    .can-feature.active .can.right {
+      transform: translateX(150px) translateY(50px) scale(0.9);
+      opacity: 1;
     }
     
     /* Products */
@@ -275,7 +310,7 @@
       padding-bottom: 4rem;
     }
     
-    /* Animation */
+    /* Reveal Animation */
     .reveal {
       opacity: 0;
       transform: translateY(40px);
@@ -335,7 +370,7 @@
         bottom: 5px;
       }
       
-      .can-feature img {
+      .can-container .can {
         width: 70vw;
       }
       
@@ -363,8 +398,13 @@
     <a href="#products" class="button">Buy Now</a>
   </header>
 
-  <section class="can-feature">
-    <img src="e60d03a9-ecc8-477b-8c42-8c834e31497d.png" alt="Squashka Can">
+  <!-- Updated can feature section with three images -->
+  <section class="can-feature reveal">
+    <div class="can-container">
+      <img src="e60d03a9-ecc8-477b-8c42-8c834e31497d.png" alt="Squashka Can" class="can center">
+      <img src="e60d03a9-ecc8-477b-8c42-8c834e31497d.png" alt="Squashka Can" class="can left">
+      <img src="e60d03a9-ecc8-477b-8c42-8c834e31497d.png" alt="Squashka Can" class="can right">
+    </div>
   </section>
 
   <section id="products" class="reveal">
