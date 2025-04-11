@@ -93,24 +93,32 @@
     
     /* Navigation */
     nav {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      right: 0;
       z-index: 1000;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       padding: 1rem 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      backdrop-filter: blur(10px);
-      background-color: rgba(245, 245, 245, 0.7);
-      transition: padding 0.3s ease, background-color 0.3s ease;
+      background-color: transparent;
+      transition: background-color 0.3s ease;
       height: 48px;
     }
     
-    nav.compact {
-      padding: 0.5rem 2rem;
-      background-color: rgba(245, 245, 245, 0.85);
+    nav.scrolled {
+      backdrop-filter: blur(10px);
+      background-color: rgba(245, 245, 245, 0.5);
+      box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    .nav-container {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     
     .logo {
@@ -144,7 +152,7 @@
     
     /* Hero Section */
     .hero {
-      padding-top: 6rem;
+      padding-top: 8rem;
       padding-bottom: 3rem;
     }
     
@@ -266,9 +274,12 @@
       }
       
       nav {
-        flex-direction: column;
         height: auto;
-        padding: 1rem;
+      }
+      
+      .nav-container {
+        flex-direction: column;
+        padding: 0.5rem 0;
       }
       
       nav ul {
@@ -279,17 +290,23 @@
       .can-feature img {
         width: 70vw;
       }
+      
+      .hero {
+        padding-top: 6rem;
+      }
     }
   </style>
 </head>
 <body>
   <nav id="navbar">
-    <div class="logo" id="logo">SQUASHKA</div>
-    <ul>
-      <li><a href="#products">Flavours</a></li>
-      <li><a href="#subscribe">Subscribe</a></li>
-      <li><a href="#footer">Contact</a></li>
-    </ul>
+    <div class="nav-container">
+      <div class="logo" id="logo">SQUASHKA</div>
+      <ul>
+        <li><a href="#products">Flavours</a></li>
+        <li><a href="#subscribe">Subscribe</a></li>
+        <li><a href="#footer">Contact</a></li>
+      </ul>
+    </div>
   </nav>
 
   <header class="hero reveal">
@@ -354,14 +371,14 @@
     reveals.forEach(reveal => observer.observe(reveal));
 
     // Navigation behavior
-    const logo = document.getElementById('logo');
     const navbar = document.getElementById('navbar');
+    const logo = document.getElementById('logo');
 
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 100) {
-        navbar.classList.add('compact');
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
       } else {
-        navbar.classList.remove('compact');
+        navbar.classList.remove('scrolled');
       }
       
       if (window.scrollY > 300) {
