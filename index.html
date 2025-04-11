@@ -57,6 +57,14 @@
       line-height: 1.1;
     }
     
+    .tagline {
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin-bottom: 1.5em;
+      color: #555;
+    }
+    
     h2 {
       font-size: 36px;
       font-weight: 600;
@@ -99,14 +107,14 @@
       right: 0;
       z-index: 1000;
       background-color: transparent;
-      transition: background-color 0.3s ease, height 0.3s ease;
+      transition: background-color 0.3s ease, height 0.3s ease, backdrop-filter 0.3s ease;
       height: 85px; /* Initial height */
     }
     
     nav.scrolled {
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(15px);
       background-color: rgba(245, 245, 245, 0.5);
-      box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 1px 15px rgba(0, 0, 0, 0.05);
     }
     
     nav.compact {
@@ -158,11 +166,30 @@
       color: #000;
       font-weight: 600;
       font-size: 14px;
-      transition: color 0.2s;
+      transition: color 0.2s, transform 0.2s;
+      position: relative;
+    }
+    
+    nav ul li a::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -4px;
+      left: 0;
+      background-color: #000;
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease;
     }
     
     nav ul li a:hover {
       color: #555;
+    }
+    
+    nav ul li a:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
     }
     
     /* Hero Section */
@@ -175,18 +202,80 @@
     .can-feature {
       margin: 0 auto 4rem;
       padding: 0;
+      position: relative;
+      height: 60vh;
+      max-height: 600px;
+      overflow: hidden;
     }
     
-    .can-feature img {
+    .can-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1000px;
+    }
+    
+    .can-image {
       width: 50vw;
       max-width: 400px;
       height: auto;
       filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
       transition: transform 0.5s ease;
+      transform-style: preserve-3d;
     }
     
-    .can-feature img:hover {
-      transform: scale(1.03) translateY(-10px);
+    .can-image:hover {
+      transform: scale(1.03) translateY(-10px) rotateY(10deg);
+    }
+    
+    /* Parallax effect for can */
+    .parallax {
+      transition: transform 0.1s ease-out;
+    }
+
+    /* Product attributes */
+    .product-attributes {
+      display: flex;
+      justify-content: center;
+      margin: 2rem auto;
+      gap: 3rem;
+    }
+    
+    .attribute {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    
+    .attribute-icon {
+      background-color: rgba(0, 0, 0, 0.05);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+    
+    .attribute-icon svg {
+      width: 30px;
+      height: 30px;
+      color: #555;
+    }
+    
+    .attribute-text {
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .attribute:hover .attribute-icon {
+      background-color: rgba(0, 0, 0, 0.1);
+      transform: translateY(-5px);
     }
     
     /* Products */
@@ -204,11 +293,372 @@
       text-align: center;
       background-color: #fff;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
     
     .card:hover {
       transform: translateY(-8px);
       box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+    }
+    
+    .card-hover-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, rgba(255,255,255,0), rgba(255,255,255,0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .card:hover .card-hover-bg {
+      opacity: 1;
+    }
+    
+    /* Nutritional info */
+    .nutrition-toggle {
+      font-size: 14px;
+      color: #555;
+      text-decoration: underline;
+      cursor: pointer;
+      display: inline-block;
+      margin: 1rem 0;
+      transition: color 0.2s ease;
+    }
+    
+    .nutrition-toggle:hover {
+      color: #000;
+    }
+    
+    .nutrition-info {
+      height: 0;
+      overflow: hidden;
+      transition: height 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+      margin-top: 1rem;
+      background-color: rgba(0, 0, 0, 0.03);
+      border-radius: 1rem;
+    }
+    
+    .nutrition-info.active {
+      height: auto;
+      opacity: 1;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .nutrition-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    
+    .nutrition-table tr {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .nutrition-table tr:last-child {
+      border-bottom: none;
+    }
+    
+    .nutrition-table td {
+      padding: 0.5rem 0;
+      text-align: left;
+    }
+    
+    .nutrition-table td:last-child {
+      text-align: right;
+    }
+    
+    /* Recommended pairings */
+    .pairing {
+      font-size: 13px;
+      background-color: rgba(0, 0, 0, 0.05);
+      padding: 0.5rem 1rem;
+      border-radius: 2rem;
+      display: inline-block;
+      margin-top: 1rem;
+      transition: all 0.2s ease;
+    }
+    
+    .pairing:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    /* Compare flavors */
+    .compare-section {
+      margin: 4rem auto;
+    }
+    
+    .compare-container {
+      background-color: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      padding: 2.5rem;
+      overflow-x: auto;
+    }
+    
+    .compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+    }
+    
+    .compare-table th {
+      padding: 1rem;
+      font-weight: 600;
+      font-size: 18px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .compare-table td {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    
+    .compare-table tr:last-child td {
+      border-bottom: none;
+    }
+    
+    /* Testimonials */
+    .testimonials {
+      margin: 4rem auto;
+    }
+    
+    .testimonials-container {
+      display: flex;
+      gap: 2rem;
+      overflow-x: auto;
+      padding: 1rem 0 2rem;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none; /* Firefox */
+    }
+    
+    .testimonials-container::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Edge */
+    }
+    
+    .testimonial {
+      min-width: 300px;
+      scroll-snap-align: start;
+      background-color: #fff;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+    }
+    
+    .testimonial-text {
+      font-size: 15px;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+    
+    .testimonial-author {
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 0.25rem;
+    }
+    
+    .testimonial-meta {
+      font-size: 14px;
+      color: #555;
+    }
+    
+    /* Our Story */
+    .our-story {
+      margin: 4rem auto;
+    }
+    
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 4rem;
+      display: flex;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .timeline-item.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .timeline-item:nth-child(odd) {
+      justify-content: flex-start;
+      padding-right: 50%;
+    }
+    
+    .timeline-item:nth-child(even) {
+      justify-content: flex-end;
+      padding-left: 50%;
+    }
+    
+    .timeline-content {
+      background-color: #fff;
+      border-radius: 1.5rem;
+      padding: 2rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      text-align: left;
+      position: relative;
+    }
+    
+    .timeline-content::after {
+      content: '';
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background-color: #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    
+    .timeline-item:nth-child(odd) .timeline-content::after {
+      right: -40px;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-content::after {
+      left: -40px;
+    }
+    
+    .timeline-date {
+      font-size: 14px;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+    
+    .timeline-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .timeline-desc {
+      font-size: 15px;
+    }
+    
+    /* Mini cart */
+    .mini-cart {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 100vh;
+      background-color: #fff;
+      box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 1001;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .mini-cart.active {
+      transform: translateX(0);
+    }
+    
+    .cart-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .cart-title {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    
+    .close-cart {
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background-color 0.2s;
+    }
+    
+    .close-cart:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 1rem;
+    }
+    
+    .cart-empty {
+      padding: 2rem;
+      text-align: center;
+      color: #555;
+    }
+    
+    .cart-footer {
+      padding: 1rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .cart-total {
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
     }
     
     /* Button */
@@ -224,12 +674,43 @@
       cursor: pointer;
       transition: all 0.3s ease;
       text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .button::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 5px;
+      height: 5px;
+      background: rgba(255, 255, 255, 0.5);
+      opacity: 0;
+      border-radius: 100%;
+      transform: scale(1, 1) translate(-50%);
+      transform-origin: 50% 50%;
     }
     
     .button:hover {
       background-color: #222;
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .button:hover::after {
+      animation: ripple 1s ease-out;
+    }
+    
+    @keyframes ripple {
+      0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+      }
+      100% {
+        transform: scale(20, 20);
+        opacity: 0;
+      }
     }
     
     /* Subscribe Form */
@@ -284,6 +765,10 @@
       h2 { font-size: 28px; }
       h3 { font-size: 20px; }
       
+      .tagline {
+        font-size: 18px;
+      }
+      
       .products {
         grid-template-columns: 1fr;
       }
@@ -307,12 +792,132 @@
         gap: 1rem;
       }
       
-      .can-feature img {
+      .can-feature {
+        height: 40vh;
+      }
+      
+      .can-image {
         width: 70vw;
       }
       
       .hero {
         padding-top: 7rem;
+      }
+      
+      .product-attributes {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      
+      .timeline::before {
+        left: 30px;
+      }
+      
+      .timeline-item {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 2rem;
+      }
+      
+      .timeline-item:nth-child(odd),
+      .timeline-item:nth-child(even) {
+        justify-content: flex-start;
+        padding-right: 0;
+        padding-left: 60px;
+      }
+      
+      .timeline-item:nth-child(odd) .timeline-content::after,
+      .timeline-item:nth-child(even) .timeline-content::after {
+        left: -30px;
+      }
+      
+      .mini-cart {
+        width: 100%;
+      }
+    }
+    
+    /* Hamburger menu for mobile */
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 30px;
+      height: 24px;
+      position: relative;
+      z-index: 1100;
+    }
+    
+    .menu-toggle span {
+      display: block;
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background: #000;
+      opacity: 1;
+      left: 0;
+      transform: rotate(0deg);
+      transition: .25s ease-in-out;
+    }
+    
+    .menu-toggle span:nth-child(1) {
+      top: 0px;
+    }
+    
+    .menu-toggle span:nth-child(2),
+    .menu-toggle span:nth-child(3) {
+      top: 10px;
+    }
+    
+    .menu-toggle span:nth-child(4) {
+      top: 20px;
+    }
+    
+    .menu-toggle.active span:nth-child(1),
+    .menu-toggle.active span:nth-child(4) {
+      top: 10px;
+      width: 0%;
+      left: 50%;
+    }
+    
+    .menu-toggle.active span:nth-child(2) {
+      transform: rotate(45deg);
+    }
+    
+    .menu-toggle.active span:nth-child(3) {
+      transform: rotate(-45deg);
+    }
+    
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+      
+      nav ul {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 70%;
+        height: 100vh;
+        background-color: #fff;
+        flex-direction: column;
+        padding: 80px 40px;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        z-index: 1050;
+        margin: 0;
+      }
+      
+      nav ul.active {
+        transform: translateX(0);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+      }
+      
+      nav ul li {
+        margin: 1rem 0;
       }
     }
   </style>
@@ -321,99 +926,65 @@
   <nav id="navbar">
     <div class="nav-container" id="nav-container">
       <div class="logo" id="logo">SQUASHKA</div>
-      <ul>
+      <button class="menu-toggle" id="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul id="nav-menu">
         <li><a href="#products">Flavours</a></li>
+        <li><a href="#compare">Compare</a></li>
+        <li><a href="#story">Our Story</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
         <li><a href="#subscribe">Subscribe</a></li>
         <li><a href="#footer">Contact</a></li>
       </ul>
     </div>
   </nav>
 
+  <div class="overlay" id="overlay"></div>
+  
+  <div class="mini-cart" id="mini-cart">
+    <div class="cart-header">
+      <div class="cart-title">Your Cart</div>
+      <button class="close-cart" id="close-cart">✕</button>
+    </div>
+    <div class="cart-items">
+      <div class="cart-empty">Your cart is empty</div>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total</span>
+        <span>£0.00</span>
+      </div>
+      <button class="button" style="width: 100%">Checkout</button>
+    </div>
+  </div>
+
   <header class="hero reveal">
     <h1>Meet Squashka</h1>
+    <div class="tagline">Refreshment, Refined.</div>
     <p>A new era of ready-to-drink. Crafted with premium vodka, vibrant squash, and crystal-clear water. Perfectly mixed. Elegantly canned.</p>
     <a href="#products" class="button">Buy Now</a>
   </header>
 
   <section class="can-feature">
-    <img src="e60d03a9-ecc8-477b-8c42-8c834e31497d.png" alt="Squashka Can">
-  </section>
-
-  <section id="products" class="reveal">
-    <h2>Our Flavours</h2>
-    <div class="products">
-      <div class="card">
-        <h3>Original Citrus</h3>
-        <p>Bright, zesty and refreshing. The perfect balance of tangy and smooth.</p>
-        <a href="#" class="button">Add to Cart</a>
-      </div>
-      <div class="card">
-        <h3>Summer Berry</h3>
-        <p>Sweet and mellow, with a hint of wild berry tang. Sunshine in a can.</p>
-        <a href="#" class="button">Add to Cart</a>
-      </div>
-      <div class="card">
-        <h3>Spiced Orange</h3>
-        <p>Subtle spice meets juicy orange for a bold, complex sip.</p>
-        <a href="#" class="button">Add to Cart</a>
-      </div>
+    <div class="can-container">
+      <img src="e60d03a9-ecc8-477b-8c42-8c834e31497d.png" alt="Squashka Can" class="can-image parallax" id="can-parallax">
     </div>
   </section>
 
-  <section id="subscribe" class="reveal">
-    <h2>Stay in the Loop</h2>
-    <p>Sign up for product drops, exclusive offers, and Squashka news.</p>
-    <form class="input-group">
-      <input type="email" placeholder="Enter your email" required />
-      <button class="button" type="submit">Subscribe</button>
-    </form>
-  </section>
-
-  <footer id="footer" class="footer reveal">
-    <p>&copy; <span id="year"></span> Squashka. All rights reserved.</p>
-    <p>Designed for the refreshingly modern.</p>
-  </footer>
-
-  <script>
-    // Set current year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Reveal animations
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    }, { threshold: 0.1 });
-    
-    reveals.forEach(reveal => observer.observe(reveal));
-
-    // Navigation behavior
-    const navbar = document.getElementById('navbar');
-    const logo = document.getElementById('logo');
-    const navContainer = document.getElementById('nav-container');
-
-    window.addEventListener('scroll', () => {
-      // Add translucent background when scrolling
-      if (window.scrollY > 20) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-      
-      // Make navbar compact and hide logo when scrolled further
-      if (window.scrollY > 100) {
-        logo.classList.add('hidden');
-        navbar.classList.add('compact');
-        navContainer.classList.add('compact');
-      } else {
-        logo.classList.remove('hidden');
-        navbar.classList.remove('compact');
-        navContainer.classList.remove('compact');
-      }
-    });
-  </script>
-</body>
-</html>
+  <div class="product-attributes">
+    <div class="attribute">
+      <div class="attribute-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 11 12 14 22 4"></polyline>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+        </svg>
+      </div>
+      <div class="attribute-text">Premium Quality</div>
+    </div>
+    <div class="attribute">
+      <div class="attribute-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linec
