@@ -4,22 +4,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Squashka – Premium Vodka Beverage</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
-    @keyframes drift {
-  0% { transform: scale(1) translate(0, 0); opacity: 0.6; }
-  25% { transform: scale(1.2) translate(25px, -25px); opacity: 0.85; }
-  50% { transform: scale(1.15) translate(-20px, 15px); opacity: 0.75; }
-  75% { transform: scale(1.25) translate(15px, -10px); opacity: 0.9; }
-  100% { transform: scale(1) translate(0, 0); opacity: 0.6; }
-}
-  50% { transform: scale(1.15) translate(20px, -20px); opacity: 0.85; }
-  100% { transform: scale(1) translate(0, 0); opacity: 0.5; }
-}
-      50% { transform: scale(1.05) translate(10px, -10px); opacity: 0.8; }
-      100% { transform: scale(1) translate(0, 0); opacity: 0.6; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
     }
-
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #f5f5f5;
+      color: #000;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Original gradient background with improved animation */
     body::before {
       content: "";
       position: fixed;
@@ -37,179 +39,248 @@
       pointer-events: none;
       animation: drift 10s ease-in-out infinite;
     }
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: -1;
-      background: 
-        radial-gradient(circle at 20% 30%, rgba(255, 200, 0, 0.15), transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(255, 100, 150, 0.12), transparent 50%),
-        radial-gradient(circle at 50% 90%, rgba(120, 200, 255, 0.08), transparent 50%);
-      background-repeat: no-repeat;
-      background-size: cover;
-      pointer-events: none;
+    
+    @keyframes drift {
+      0% { transform: scale(1) translate(0, 0); opacity: 0.6; }
+      25% { transform: scale(1.2) translate(25px, -25px); opacity: 0.85; }
+      50% { transform: scale(1.15) translate(-20px, 15px); opacity: 0.75; }
+      75% { transform: scale(1.25) translate(15px, -10px); opacity: 0.9; }
+      100% { transform: scale(1) translate(0, 0); opacity: 0.6; }
     }
-    * {
-      box-sizing: border-box;
-      scroll-behavior: smooth;
+    
+    /* Typography */
+    h1 {
+      font-size: 48px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5em;
+      line-height: 1.1;
     }
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #f5f5f5;
-      color: #000;
-      line-height: 1.6;
+    
+    h2 {
+      font-size: 36px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.6em;
+      line-height: 1.2;
     }
-    header, footer, section {
-      padding: 2.5rem 1.25rem;
+    
+    h3 {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.7em;
+    }
+    
+    p {
+      font-size: 17px;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Layout */
+    header, 
+    footer, 
+    section {
+      padding: 4rem 2rem;
       max-width: 1100px;
       margin: 0 auto;
+      text-align: center;
     }
-    h1, h2, h3 {
-      font-weight: 800;
-      margin-bottom: 1rem;
+    
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      backdrop-filter: blur(10px);
+      background-color: rgba(245, 245, 245, 0.7);
+      transition: padding 0.3s ease, background-color 0.3s ease;
+      height: 48px;
     }
-    p {
-      margin-bottom: 1.5rem;
-      color: inherit;
+    
+    nav.compact {
+      padding: 0.5rem 2rem;
+      background-color: rgba(245, 245, 245, 0.85);
     }
+    
+    .logo {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: opacity 0.3s ease;
+    }
+    
+    .logo.hidden {
+      opacity: 0;
+    }
+    
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+    
+    nav ul li a {
+      text-decoration: none;
+      color: #000;
+      font-weight: 600;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    
+    nav ul li a:hover {
+      color: #555;
+    }
+    
+    /* Hero Section */
     .hero {
-  text-align: center;
-  padding-top: 3rem;
-  padding-bottom: 4rem;
-}
+      padding-top: 6rem;
+      padding-bottom: 3rem;
+    }
+    
+    /* Can Feature */
+    .can-feature {
+      margin: 0 auto 4rem;
+      padding: 0;
+    }
+    
+    .can-feature img {
+      width: 50vw;
+      max-width: 400px;
+      height: auto;
+      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
+      transition: transform 0.5s ease;
+    }
+    
+    .can-feature img:hover {
+      transform: scale(1.03) translateY(-10px);
+    }
+    
+    /* Products */
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .card {
+      border-radius: 1.5rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      padding: 2.5rem 2rem;
+      text-align: center;
+      background-color: #fff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
+    }
+    
+    /* Button */
     .button {
+      display: inline-block;
       background-color: #000;
       color: #fff;
       border: none;
       padding: 0.9rem 2rem;
       border-radius: 1.5rem;
       font-size: 1rem;
+      font-weight: 500;
       cursor: pointer;
-      transition: 0.3s;
+      transition: all 0.3s ease;
+      text-decoration: none;
     }
+    
     .button:hover {
       background-color: #222;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    .can-feature {
-  text-align: center;
-  margin: 2rem auto 3rem;
-  padding: 0;
-}
-    .can-feature img {
-  width: 50vw;
-  max-width: 400px;
-  height: auto;
-  opacity: 1;
-}
-    .products {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
-    @media (min-width: 700px) {
-      .products {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      }
-    }
-    .card {
-      border-radius: 1.5rem;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-      padding: 2rem 1.5rem;
-      text-align: center;
-      background-color: #fff;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 45px rgba(0,0,0,0.15);
-    }
-    .card h3 {
-      font-size: 1.4rem;
-    }
+    
+    /* Subscribe Form */
     .input-group {
       display: flex;
       flex-direction: column;
       gap: 1rem;
-      margin-top: 1.5rem;
+      margin: 2rem auto 0;
+      max-width: 600px;
     }
+    
     .input-group input {
-      padding: 1rem;
-      font-size: 1rem;
+      padding: 1rem 1.5rem;
+      font-size: 16px;
       border-radius: 0.75rem;
       border: 1px solid #ccc;
-      flex: 1;
+      background-color: rgba(255, 255, 255, 0.8);
+      transition: all 0.2s ease;
     }
+    
+    .input-group input:focus {
+      outline: none;
+      border-color: #000;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Footer */
     .footer {
       text-align: center;
       font-size: 0.875rem;
       color: #666;
       border-top: 1px solid #ddd;
       padding-top: 2rem;
+      padding-bottom: 4rem;
     }
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 1.25rem 1rem 0.75rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      backdrop-filter: blur(10px);
-      background-color: transparent;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-      transition: padding 0.3s ease, height 0.3s ease;
-    }
-    nav.compact {
-      padding: 0;
-    }
-    .logo {
-  font-family: 'SF Pro Display', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-size: 2rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  transition: opacity 0.3s ease;
-}
-    .logo.hidden {
-      display: none;
-    }
-    nav ul {
-      list-style: none;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.25rem;
-      margin: 0;
-      padding: 0.25rem 0 0;
-    }
-    nav ul li a {
-      text-decoration: none;
-      color: inherit;
-      font-weight: 600;
-      font-size: 0.95rem;
-      transition: 0.2s;
-    }
-    nav ul li a:hover {
-      color: #555;
-    }
-
+    
+    /* Animation */
     .reveal {
       opacity: 0;
       transform: translateY(40px);
-      transition: all 0.6s ease-out;
+      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     }
+    
     .reveal.active {
       opacity: 1;
       transform: translateY(0);
     }
-  
-</style>
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      h1 { font-size: 36px; }
+      h2 { font-size: 28px; }
+      h3 { font-size: 20px; }
+      
+      .products {
+        grid-template-columns: 1fr;
+      }
+      
+      nav {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem;
+      }
+      
+      nav ul {
+        margin-top: 0.5rem;
+        gap: 1rem;
+      }
+      
+      .can-feature img {
+        width: 70vw;
+      }
+    }
+  </style>
 </head>
 <body>
   <nav id="navbar">
@@ -222,9 +293,9 @@
   </nav>
 
   <header class="hero reveal">
-        <h1>Meet Squashka</h1>
+    <h1>Meet Squashka</h1>
     <p>A new era of ready-to-drink. Crafted with premium vodka, vibrant squash, and crystal-clear water. Perfectly mixed. Elegantly canned.</p>
-    <button class="button">Buy Now</button>
+    <a href="#products" class="button">Buy Now</a>
   </header>
 
   <section class="can-feature">
@@ -232,30 +303,30 @@
   </section>
 
   <section id="products" class="reveal">
-    <h2 style="text-align:center">Our Flavours</h2>
+    <h2>Our Flavours</h2>
     <div class="products">
       <div class="card">
         <h3>Original Citrus</h3>
         <p>Bright, zesty and refreshing. The perfect balance of tangy and smooth.</p>
-        <button class="button">Add to Cart</button>
+        <a href="#" class="button">Add to Cart</a>
       </div>
       <div class="card">
         <h3>Summer Berry</h3>
         <p>Sweet and mellow, with a hint of wild berry tang. Sunshine in a can.</p>
-        <button class="button">Add to Cart</button>
+        <a href="#" class="button">Add to Cart</a>
       </div>
       <div class="card">
         <h3>Spiced Orange</h3>
         <p>Subtle spice meets juicy orange for a bold, complex sip.</p>
-        <button class="button">Add to Cart</button>
+        <a href="#" class="button">Add to Cart</a>
       </div>
     </div>
   </section>
 
   <section id="subscribe" class="reveal">
-    <h2 style="text-align:center">Stay in the Loop</h2>
-    <p style="text-align:center">Sign up for product drops, exclusive offers, and Squashka news.</p>
-    <form class="input-group" style="max-width:600px; margin: 0 auto;">
+    <h2>Stay in the Loop</h2>
+    <p>Sign up for product drops, exclusive offers, and Squashka news.</p>
+    <form class="input-group">
       <input type="email" placeholder="Enter your email" required />
       <button class="button" type="submit">Subscribe</button>
     </form>
@@ -267,8 +338,10 @@
   </footer>
 
   <script>
+    // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
+    // Reveal animations
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
@@ -277,20 +350,24 @@
         }
       });
     }, { threshold: 0.1 });
+    
     reveals.forEach(reveal => observer.observe(reveal));
 
+    // Navigation behavior
     const logo = document.getElementById('logo');
     const navbar = document.getElementById('navbar');
 
     window.addEventListener('scroll', () => {
-      const scrollY = window.scrollY;
-
-      if (scrollY > 300) {
-        logo.classList.add('hidden');
+      if (window.scrollY > 100) {
         navbar.classList.add('compact');
       } else {
-        logo.classList.remove('hidden');
         navbar.classList.remove('compact');
+      }
+      
+      if (window.scrollY > 300) {
+        logo.classList.add('hidden');
+      } else {
+        logo.classList.remove('hidden');
       }
     });
   </script>
