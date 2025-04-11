@@ -209,18 +209,21 @@
       transform: translateY(0);
     }
   .splash-bg {
-      position: absolute;
-      top: 10%;
-      left: 50%;
-      transform: translateX(-50%) scale(1.1);
-      background: url('ChatGPT Image Apr 11, 2025 at 01_33_48 AM.png') no-repeat center;
-      background-size: contain;
-      width: 600px;
-      height: 600px;
-      z-index: 1;
-      opacity: 0.25;
-      pointer-events: none;
-    }
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%) scale(1.1);
+  background: url('assets/splash.png') no-repeat center;
+  background-size: contain;
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  z-index: 1;
+  opacity: 0.25;
+  pointer-events: none;
+  overflow-x: hidden;
+}
 </style>
 </head>
 <body>
