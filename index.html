@@ -33,25 +33,7 @@
     .hero {
       text-align: center;
       padding-top: 6rem;
-      padding-bottom: 6rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .hero h1, .hero p, .hero button {
-      position: relative;
-      z-index: 2;
-    }
-    .can-image {
-      position: absolute;
-      top: 55%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(1);
-      width: 40vw;
-      max-width: 320px;
-      transition: transform 0.2s ease-out;
-      z-index: 1;
-      opacity: 0.95;
-      pointer-events: none;
+      padding-bottom: 4rem;
     }
     .button {
       background-color: #000;
@@ -65,6 +47,16 @@
     }
     .button:hover {
       background-color: #222;
+    }
+    .can-feature {
+      text-align: center;
+      margin: 4rem auto 6rem;
+    }
+    .can-feature img {
+      width: 40vw;
+      max-width: 320px;
+      height: auto;
+      opacity: 1;
     }
     .products {
       display: grid;
@@ -179,11 +171,14 @@
   </nav>
 
   <header class="hero reveal">
-    <img src="e60d03a9-ecc8-477b-8c42-8c834e31497d.png" alt="Squashka Can" class="can-image" id="can">
     <h1>Meet Squashka</h1>
     <p>A new era of ready-to-drink. Crafted with premium vodka, vibrant squash, and crystal-clear water. Perfectly mixed. Elegantly canned.</p>
     <button class="button">Buy Now</button>
   </header>
+
+  <section class="can-feature">
+    <img src="e60d03a9-ecc8-477b-8c42-8c834e31497d.png" alt="Squashka Can">
+  </section>
 
   <section id="products" class="reveal">
     <h2 style="text-align:center">Our Flavours</h2>
@@ -235,12 +230,10 @@
 
     const logo = document.getElementById('logo');
     const navbar = document.getElementById('navbar');
-    const can = document.getElementById('can');
 
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
 
-      // Fade out logo and shrink nav
       if (scrollY > 300) {
         logo.classList.add('hidden');
         navbar.classList.add('compact');
@@ -248,11 +241,6 @@
         logo.classList.remove('hidden');
         navbar.classList.remove('compact');
       }
-
-      // Can animation (slower for elegance)
-      const scale = 1 + scrollY * 0.0003;
-      const translateY = scrollY * 0.08;
-      can.style.transform = `translate(-50%, calc(-50% + ${translateY}px)) scale(${scale})`;
     });
   </script>
 </body>
