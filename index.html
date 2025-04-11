@@ -100,7 +100,7 @@
       z-index: 1000;
       background-color: transparent;
       transition: background-color 0.3s ease, height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      height: 85px; /* Initial height */
+      height: 85px;
       overflow: hidden;
     }
     
@@ -185,7 +185,7 @@
       margin: 0 auto 4rem;
       padding: 0;
       position: relative;
-      height: 400px; /* Gives space for absolute positioning */
+      height: 400px;
     }
     
     .can-container {
@@ -202,7 +202,7 @@
       max-width: 400px;
       height: auto;
       filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
-      transition: transform 0.1s ease-out; /* for smoother updates */
+      transition: transform 0.1s ease-out;
       position: absolute;
     }
     
@@ -374,7 +374,7 @@
     <a href="#products" class="button">Buy Now</a>
   </header>
 
-  <!-- Updated can feature section with three images -->
+  <!-- Can Feature Section -->
   <section class="can-feature">
     <div class="can-container">
       <img src="e60d03a9-ecc8-477b-8c42-8c834e31497d.png" alt="Squashka Can" class="can center">
@@ -419,21 +419,22 @@
   </footer>
 
   <script>
-    // Set current year in footer
+    // Set current year
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    // Reveal animations for sections (using IntersectionObserver)
+    // Reveal animations (using IntersectionObserver)
     const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('active');
         }
       });
     }, { threshold: 0.1 });
+    
     reveals.forEach(reveal => observer.observe(reveal));
 
-    // Navigation behavior for background and compact style
+    // Navigation behavior
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
       if (window.scrollY > 20) {
@@ -441,7 +442,6 @@
       } else {
         navbar.classList.remove('scrolled');
       }
-      
       if (window.scrollY > 60) {
         navbar.classList.add('compact');
       } else {
@@ -457,22 +457,26 @@
 
     function updateCanAnimation() {
       const rect = canFeature.getBoundingClientRect();
-      // Compute progress: 0 when the section's top is at the bottom of the viewport,
-      // 1 when the section is completely past the top of the viewport.
-      const progress = Math.min(1, Math.max(0, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
+      // Adjust progress so that maximum effect is reached sooner.
+      // Here we use rect.height * 0.6 instead of a longer distance.
+      const progress = Math.min(1, Math.max(0, (window.innerHeight - rect.top) / (rect.height * 0.6)));
 
-      // Left can: Move leftwards and downward, scale from 1 to 0.9, fade from 0 to 1
-      const leftTranslateX = -150 * progress;
+      // For mobile devices, reduce lateral spread.
+      const isMobile = window.innerWidth <= 768;
+      const spreadFactor = isMobile ? 0.5 : 1;
+
+      // Left can: slide leftward & downward, scale from 1 to 0.9, fade from 0 to 1.
+      const leftTranslateX = -150 * progress * spreadFactor;
       const leftTranslateY = 50 * progress;
       const leftScale = 1 - 0.1 * progress;
       const leftOpacity = progress;
       
-      // Center can: Slight upward lift and slight scale up
+      // Center can: lift upward and scale up slightly.
       const centerTranslateY = -10 * progress;
       const centerScale = 1 + 0.03 * progress;
       
-      // Right can: Move rightwards and downward, scale from 1 to 0.9, fade from 0 to 1
-      const rightTranslateX = 150 * progress;
+      // Right can: slide rightward & downward, scale from 1 to 0.9, fade from 0 to 1.
+      const rightTranslateX = 150 * progress * spreadFactor;
       const rightTranslateY = 50 * progress;
       const rightScale = 1 - 0.1 * progress;
       const rightOpacity = progress;
