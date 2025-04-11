@@ -91,7 +91,7 @@
       text-align: center;
     }
     
-    /* Navigation */
+    /* Navigation - UPDATED */
     nav {
       position: fixed;
       top: 0;
@@ -99,18 +99,15 @@
       right: 0;
       z-index: 1000;
       background-color: transparent;
-      transition: background-color 0.3s ease, height 0.3s ease;
+      transition: background-color 0.3s ease;
       height: 85px; /* Initial height */
+      overflow: hidden;
     }
     
     nav.scrolled {
       backdrop-filter: blur(10px);
       background-color: rgba(245, 245, 245, 0.5);
       box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
-    }
-    
-    nav.compact {
-      height: 45px; /* Compact height after scroll */
     }
     
     .nav-container {
@@ -123,11 +120,14 @@
       justify-content: center;
       height: 100%;
       padding: 0 2rem;
-      transition: padding 0.3s ease;
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
     
-    .nav-container.compact {
-      flex-direction: row;
+    .nav-content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
     }
     
@@ -136,14 +136,15 @@
       font-weight: 600;
       letter-spacing: -0.01em;
       margin-bottom: 8px;
-      transition: all 0.3s ease;
+      transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      height: 30px; /* Fixed height for the logo */
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
-    .logo.hidden {
-      opacity: 0;
-      margin: 0;
-      height: 0;
-      overflow: hidden;
+    nav.compact .nav-container {
+      transform: translateY(-30px); /* Slide the entire container up by logo height */
     }
     
     nav ul {
@@ -151,6 +152,8 @@
       display: flex;
       gap: 2rem;
       transition: all 0.3s ease;
+      height: 45px; /* Fixed height for navigation links */
+      align-items: center;
     }
     
     nav ul li a {
@@ -288,23 +291,28 @@
         grid-template-columns: 1fr;
       }
       
-      nav, nav.compact {
+      nav {
         height: auto;
         padding: 10px 0;
       }
       
-      .nav-container, .nav-container.compact {
-        flex-direction: column;
+      .nav-container {
         padding: 0.5rem 1rem;
+      }
+      
+      nav.compact .nav-container {
+        transform: translateY(-25px); /* Adjust for smaller screens */
       }
       
       .logo {
         margin-bottom: 5px;
+        height: 25px;
       }
       
       nav ul {
         margin-top: 0.25rem;
         gap: 1rem;
+        height: auto;
       }
       
       .can-feature img {
@@ -320,12 +328,14 @@
 <body>
   <nav id="navbar">
     <div class="nav-container" id="nav-container">
-      <div class="logo" id="logo">SQUASHKA</div>
-      <ul>
-        <li><a href="#products">Flavours</a></li>
-        <li><a href="#subscribe">Subscribe</a></li>
-        <li><a href="#footer">Contact</a></li>
-      </ul>
+      <div class="nav-content">
+        <div class="logo" id="logo">SQUASHKA</div>
+        <ul>
+          <li><a href="#products">Flavours</a></li>
+          <li><a href="#subscribe">Subscribe</a></li>
+          <li><a href="#footer">Contact</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
 
@@ -392,7 +402,6 @@
 
     // Navigation behavior
     const navbar = document.getElementById('navbar');
-    const logo = document.getElementById('logo');
     const navContainer = document.getElementById('nav-container');
 
     window.addEventListener('scroll', () => {
@@ -403,15 +412,11 @@
         navbar.classList.remove('scrolled');
       }
       
-      // Make navbar compact and hide logo when scrolled further
-      if (window.scrollY > 100) {
-        logo.classList.add('hidden');
+      // Make navbar compact when scrolled further
+      if (window.scrollY > 80) {
         navbar.classList.add('compact');
-        navContainer.classList.add('compact');
       } else {
-        logo.classList.remove('hidden');
         navbar.classList.remove('compact');
-        navContainer.classList.remove('compact');
       }
     });
   </script>
