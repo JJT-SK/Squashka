@@ -2,487 +2,189 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Squashka – Premium Vodka Beverage</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Squashka Dripping Header</title>
   <style>
+    /* Basic reset */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      scroll-behavior: smooth;
     }
-    
-    html, body {
-      height: 100%;
-    }
-    
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: #000;
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-      /* New background from Code 1 */
-      background: linear-gradient(135deg, #ff6f91, #ff9671, #ffc75f, #f9f871, #a0c4ff, #bdb2ff);
-      background-size: 600% 600%;
-      animation: slime 20s ease infinite;
+      font-family: Arial, sans-serif;
+      background: #fff;
+      /* So we can see the drips fall “off screen” if you scroll */
+      height: 2000px; 
     }
-    
-    /* Removed the old pseudo-element background from Code 2 */
-    
-    @keyframes slime {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
+
+    /*****************************************
+     * Header Container
+     *****************************************/
+    .header {
+      position: relative;
+      width: 100%;
+      height: 300px;
+      overflow: hidden; /* Hides anything outside the header (like top of drips) */
+      background: #8A2BE2; /* Purple color (adjust as desired) */
     }
-    
-    /* Typography */
-    h1 {
-      font-size: 48px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.5em;
-      line-height: 1.1;
-    }
-    
-    h2 {
-      font-size: 36px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.6em;
-      line-height: 1.2;
-    }
-    
-    h3 {
-      font-size: 24px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.7em;
-    }
-    
-    p {
-      font-size: 17px;
-      font-weight: 400;
-      margin-bottom: 1.5rem;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    
-    /* Layout */
-    header, 
-    footer, 
-    section {
-      padding: 4rem 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
+
+    /*****************************************
+     * Logo
+     *****************************************/
+    .logo {
+      position: relative;
       text-align: center;
+      padding-top: 50px;  /* Adjust vertical spacing */
+      font-size: 64px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      color: #fff;
+      z-index: 10;  /* Ensure logo stays on top of the drips */
     }
-    
-    /* Navigation */
-    nav {
-      position: fixed;
+
+    /*****************************************
+     * Wavy Drip Shape (SVG)
+     *****************************************/
+    .drip-shape {
+      position: absolute;
       top: 0;
       left: 0;
-      right: 0;
-      z-index: 1000;
-      background-color: transparent;
-      transition: background-color 0.3s ease, height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      height: 85px; /* Initial height */
-      overflow: hidden;
-    }
-    
-    nav.scrolled {
-      backdrop-filter: blur(10px);
-      background-color: rgba(245, 245, 245, 0.5);
-      box-shadow: 0 1px 10px rgba(0, 0, 0, 0.05);
-    }
-    
-    nav.compact {
-      height: 50px;
-    }
-    
-    .nav-container {
       width: 100%;
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      height: 100%;
-      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      position: relative;
-    }
-    
-    .logo {
-      position: absolute;
-      top: 15px;
-      left: 0;
-      right: 0;
-      margin: 0 auto;
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      text-align: center;
-      transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      height: 30px;
-      line-height: 30px;
-    }
-    
-    nav ul {
-      position: absolute;
-      bottom: 15px;
-      left: 0;
-      right: 0;
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-      height: 30px;
-    }
-    
-    nav.compact .logo {
-      transform: translateY(-50px);
-      opacity: 0;
-    }
-    
-    nav.compact ul {
-      transform: translateY(-5px);
-      bottom: 10px;
-    }
-    
-    nav ul li a {
-      text-decoration: none;
-      color: #000;
-      font-weight: 600;
-      font-size: 14px;
-      transition: color 0.2s;
-    }
-    
-    nav ul li a:hover {
-      color: #555;
-    }
-    
-    /* Hero Section */
-    .hero {
-      padding-top: 8rem;
-      padding-bottom: 3rem;
-    }
-    
-    /* Can Feature – Updated for gradual scroll-controlled animation */
-    .can-feature {
-      margin: 0 auto 4rem;
-      padding: 0;
-      position: relative;
-      height: 400px; /* Gives space for absolute positioning */
-    }
-    
-    .can-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .can-container .can {
-      width: 50vw;
-      max-width: 400px;
       height: auto;
-      filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.1));
-      transition: transform 0.1s ease-out; /* for smoother updates */
+      z-index: 1;
+    }
+
+    /* 
+      The path here is just an example wave-like shape. 
+      You can change it to match your "melting" or "dripping" design more accurately.
+    */
+    .drip-shape path {
+      fill: #8A2BE2; /* Same color as header background */
+    }
+
+    /*****************************************
+     * Animated Drip Blobs
+     *****************************************/
+    .drip-blob {
       position: absolute;
+      bottom: 0; 
+      width: 50px;
+      height: 50px;
+      background: #8A2BE2;  /* Matches header color */
+      border-radius: 50%;   /* Make it a circle-ish blob */
+      opacity: 0;           /* Start invisible */
+      z-index: 2;           /* In front of the wavy shape */
+      animation-timing-function: ease-in; 
     }
-    
-    /* Initial state – center can is fully visible; side cans start overlapped and transparent */
-    .can.center {
-      transform: none;
-      opacity: 1;
-      z-index: 2;
+
+    /* 
+      Feel free to add more drip-blob divs or vary their timings. 
+      Each .drip-blob has its own animation pattern.
+    */
+    .drip-blob.drip1 {
+      left: 20%;
+      animation: dripAnim1 3s infinite;
     }
-    
-    .can.left,
-    .can.right {
-      transform: none;
-      opacity: 0;
+    .drip-blob.drip2 {
+      left: 50%;
+      animation: dripAnim2 2.5s infinite;
     }
-    
-    /* Products */
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
+    .drip-blob.drip3 {
+      left: 75%;
+      animation: dripAnim3 4s infinite;
     }
-    
-    .card {
-      border-radius: 1.5rem;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-      padding: 2.5rem 2rem;
-      text-align: center;
-      background-color: #fff;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
-    }
-    
-    /* Button */
-    .button {
-      display: inline-block;
-      background-color: #000;
-      color: #fff;
-      border: none;
-      padding: 0.9rem 2rem;
-      border-radius: 1.5rem;
-      font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-    
-    .button:hover {
-      background-color: #222;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Subscribe Form */
-    .input-group {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      margin: 2rem auto 0;
-      max-width: 600px;
-    }
-    
-    .input-group input {
-      padding: 1rem 1.5rem;
-      font-size: 16px;
-      border-radius: 0.75rem;
-      border: 1px solid #ccc;
-      background-color: rgba(255, 255, 255, 0.8);
-      transition: all 0.2s ease;
-    }
-    
-    .input-group input:focus {
-      outline: none;
-      border-color: #000;
-      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Footer */
-    .footer {
-      text-align: center;
-      font-size: 0.875rem;
-      color: #666;
-      border-top: 1px solid #ddd;
-      padding-top: 2rem;
-      padding-bottom: 4rem;
-    }
-    
-    /* Reveal Animation for other sections */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-    }
-    
-    .reveal.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    
-    /* Responsive */
-    @media (max-width: 768px) {
-      h1 { font-size: 36px; }
-      h2 { font-size: 28px; }
-      h3 { font-size: 20px; }
-      
-      .products {
-        grid-template-columns: 1fr;
+
+    /*
+      The keyframes below move each drip from the bottom of the header
+      downward (and also fade out) so it looks like they're dripping 
+      off the header. Adjust final translateY() to make them fall 
+      further or shorter. 
+    */
+
+    @keyframes dripAnim1 {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
       }
-      
-      nav {
-        height: 70px;
+      80% {
+        opacity: 1;
       }
-      
-      nav.compact {
-        height: 40px;
-      }
-      
-      .nav-container {
-        padding: 0 1rem;
-      }
-      
-      .logo {
-        top: 10px;
-        font-size: 18px;
-        height: 25px;
-        line-height: 25px;
-      }
-      
-      nav ul {
-        bottom: 10px;
-        gap: 1.25rem;
-      }
-      
-      nav ul li a {
-        font-size: 13px;
-      }
-      
-      .can-container .can {
-        width: 70vw;
-      }
-      
-      .hero {
-        padding-top: 7rem;
+      100% {
+        transform: translateY(600px);
+        opacity: 0;
       }
     }
+
+    @keyframes dripAnim2 {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      60% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(500px);
+        opacity: 0;
+      }
+    }
+
+    @keyframes dripAnim3 {
+      0% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      70% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(700px);
+        opacity: 0;
+      }
+    }
+
   </style>
 </head>
 <body>
-  <nav id="navbar">
-    <div class="nav-container">
-      <div class="logo" id="logo">SQUASHKA</div>
-      <ul>
-        <li><a href="#products">Flavours</a></li>
-        <li><a href="#subscribe">Subscribe</a></li>
-        <li><a href="#footer">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
+  <!-- Dripping Header -->
+  <div class="header">
 
-  <header class="hero reveal">
-    <h1>Meet Squashka</h1>
-    <p>A new era of ready-to-drink. Crafted with premium vodka, vibrant squash, and crystal-clear water. Perfectly mixed. Elegantly canned.</p>
-    <a href="#products" class="button">Buy Now</a>
-  </header>
+    <!-- Example “Melting” or “Wavy” shape across the top (SVG). 
+         You can swap this path with your own for custom drip shapes. -->
+    <svg 
+      class="drip-shape" 
+      viewBox="0 0 1440 320" 
+      preserveAspectRatio="none"
+    >
+      <path d="
+        M0,224
+        L48,208
+        C96,192,192,160,288,176
+        C384,192,480,256,576,266.7
+        C672,277,768,235,864,186.7
+        C960,139,1056,85,1152,90.7
+        C1248,96,1344,160,1392,192
+        L1440,224
+        L1440,0
+        L1392,0
+        C1344,0,1248,0,1152,0
+        C1056,0,960,0,864,0
+        C768,0,672,0,576,0
+        C480,0,384,0,288,0
+        C192,0,96,0,48,0
+        L0,0
+        Z
+      " />
+    </svg>
 
-  <!-- Updated can feature section with three images -->
-  <section class="can-feature">
-    <div class="can-container">
-      <img src="e60d03a9-ecc8-477b-8c42-8c834e31497d.png" alt="Squashka Can" class="can center">
-      <img src="e60d03a9-ecc8-477b-8c42-8c834e31497d.png" alt="Squashka Can" class="can left">
-      <img src="e60d03a9-ecc8-477b-8c42-8c834e31497d.png" alt="Squashka Can" class="can right">
-    </div>
-  </section>
+    <!-- Squashka Logo Text -->
+    <div class="logo">SQUASHKA</div>
 
-  <section id="products" class="reveal">
-    <h2>Our Flavours</h2>
-    <div class="products">
-      <div class="card">
-        <h3>Original Citrus</h3>
-        <p>Bright, zesty and refreshing. The perfect balance of tangy and smooth.</p>
-        <a href="#" class="button">Add to Cart</a>
-      </div>
-      <div class="card">
-        <h3>Summer Berry</h3>
-        <p>Sweet and mellow, with a hint of wild berry tang. Sunshine in a can.</p>
-        <a href="#" class="button">Add to Cart</a>
-      </div>
-      <div class="card">
-        <h3>Spiced Orange</h3>
-        <p>Subtle spice meets juicy orange for a bold, complex sip.</p>
-        <a href="#" class="button">Add to Cart</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="subscribe" class="reveal">
-    <h2>Stay in the Loop</h2>
-    <p>Sign up for product drops, exclusive offers, and Squashka news.</p>
-    <form class="input-group">
-      <input type="email" placeholder="Enter your email" required />
-      <button class="button" type="submit">Subscribe</button>
-    </form>
-  </section>
-
-  <footer id="footer" class="footer reveal">
-    <p>&copy; <span id="year"></span> Squashka. All rights reserved.</p>
-    <p>Designed for the refreshingly modern.</p>
-  </footer>
-
-  <script>
-    // Set current year in footer
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Reveal animations for sections (using IntersectionObserver)
-    const reveals = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    }, { threshold: 0.1 });
-    reveals.forEach(reveal => observer.observe(reveal));
-
-    // Navigation behavior for background and compact style
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 20) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-      
-      if (window.scrollY > 60) {
-        navbar.classList.add('compact');
-      } else {
-        navbar.classList.remove('compact');
-      }
-    });
-
-    // Scroll-controlled animation for the can feature
-    const canFeature = document.querySelector('.can-feature');
-    const leftCan = document.querySelector('.can.left');
-    const centerCan = document.querySelector('.can.center');
-    const rightCan = document.querySelector('.can.right');
-
-    function updateCanAnimation() {
-      const rect = canFeature.getBoundingClientRect();
-      // Compute progress: 0 when the section's top is at the bottom of the viewport,
-      // 1 when the section is completely past the top of the viewport.
-      const progress = Math.min(1, Math.max(0, (window.innerHeight - rect.top) / (window.innerHeight + rect.height)));
-
-      // Left can: Move leftwards and downward, scale from 1 to 0.9, fade from 0 to 1
-      const leftTranslateX = -150 * progress;
-      const leftTranslateY = 50 * progress;
-      const leftScale = 1 - 0.1 * progress;
-      const leftOpacity = progress;
-      
-      // Center can: Slight upward lift and slight scale up
-      const centerTranslateY = -10 * progress;
-      const centerScale = 1 + 0.03 * progress;
-      
-      // Right can: Move rightwards and downward, scale from 1 to 0.9, fade from 0 to 1
-      const rightTranslateX = 150 * progress;
-      const rightTranslateY = 50 * progress;
-      const rightScale = 1 - 0.1 * progress;
-      const rightOpacity = progress;
-      
-      leftCan.style.transform = `translate(${leftTranslateX}px, ${leftTranslateY}px) scale(${leftScale})`;
-      leftCan.style.opacity = leftOpacity;
-      
-      centerCan.style.transform = `translateY(${centerTranslateY}px) scale(${centerScale})`;
-      
-      rightCan.style.transform = `translate(${rightTranslateX}px, ${rightTranslateY}px) scale(${rightScale})`;
-      rightCan.style.opacity = rightOpacity;
-    }
-    
-    window.addEventListener('scroll', updateCanAnimation);
-    window.addEventListener('resize', updateCanAnimation);
-    updateCanAnimation();
-  </script>
+    <!-- Animated drip circles (add as many as you like) -->
+    <div class="drip-blob drip1"></div>
+    <div class="drip-blob drip2"></div>
+    <div class="drip-blob drip3"></div>
+  </div>
 </body>
 </html>
